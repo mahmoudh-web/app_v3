@@ -1,0 +1,8 @@
+.DS_Store
+
+node_modules
+.env
+backups
+restore/five/*
+restore/three/*
+restore/one/*
