@@ -127,7 +127,7 @@ const processQueue = async () => {
 	await processJob(job)
 
 	//delete job
-	// await Queue.findByIdAndDelete(job._id)
+	await Queue.findByIdAndDelete(job._id)
 	processing = false
 }
 

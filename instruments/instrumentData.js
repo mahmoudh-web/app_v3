@@ -43,7 +43,8 @@ const setMarketData = async data => {
 				instrument.allowedSelfTradePreventionModes,
 			download:
 				instrument.quoteAsset === "USDT" &&
-				instrument.isSpotTradingAllowed
+				instrument.isSpotTradingAllowed &&
+				instrument.status === "TRADING"
 					? true
 					: false,
 		}
