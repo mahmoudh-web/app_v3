@@ -30,7 +30,7 @@ const createQueueItems = async () => {
 		const lastCandles = await getLastCandles(instrument.symbol)
 
 		if (lastCandles.one) {
-			oneStart = DateTime.fromMillis(lastCandles.one.start)
+			oneStart = DateTime.fromMillis(lastCandles.one.startTime)
 				.plus({ minutes: 1 })
 				.setZone("utc")
 		} else {
@@ -43,7 +43,7 @@ const createQueueItems = async () => {
 		}
 
 		if (lastCandles.three) {
-			threeStart = DateTime.fromMillis(lastCandles.three.start)
+			threeStart = DateTime.fromMillis(lastCandles.three.startTime)
 				.plus({ minutes: 3 })
 				.setZone("utc")
 		} else {
@@ -56,7 +56,7 @@ const createQueueItems = async () => {
 		}
 
 		if (lastCandles.five) {
-			fiveStart = DateTime.fromMillis(lastCandles.five.start)
+			fiveStart = DateTime.fromMillis(lastCandles.five.startTime)
 				.plus({ minutes: 5 })
 				.setZone("utc")
 		} else {
@@ -69,7 +69,7 @@ const createQueueItems = async () => {
 		}
 
 		if (lastCandles.fifteen) {
-			fifteenStart = DateTime.fromMillis(lastCandles.fifteen.start)
+			fifteenStart = DateTime.fromMillis(lastCandles.fifteen.startTime)
 				.plus({ minutes: 15 })
 				.setZone("utc")
 		} else {
@@ -82,7 +82,7 @@ const createQueueItems = async () => {
 		}
 
 		if (lastCandles.hour) {
-			hourStart = DateTime.fromMillis(lastCandles.hour.start)
+			hourStart = DateTime.fromMillis(lastCandles.hour.startTime)
 				.plus({ hours: 1 })
 				.setZone("utc")
 		} else {

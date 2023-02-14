@@ -133,17 +133,17 @@ const processQueue = async () => {
 
 // start processes
 
-if (helper === "false") {
-	await marketData()
-	setInterval(marketData, 3600000)
-}
+// if (helper === "false") {
+// 	await marketData()
+// 	setInterval(marketData, 3600000)
+// }
 
 if (helper === "false") {
 	await checkQueue()
 	setInterval(checkQueue, initialise ? 60000 : 3600000)
 }
 
-await processQueue()
-setInterval(processQueue, 5000)
+// await processQueue()
+// setInterval(processQueue, 5000)
 
 // disconnectDb()

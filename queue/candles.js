@@ -12,26 +12,26 @@ const getLastCandles = async instrument => {
 	const one = await kline_1m
 		.findOne({ identifier: { $regex: `^${instrument}` } })
 		.sort({ identifier: -1 })
-		.select("start")
+		.select("startTime")
 	const three = await kline_3m
 		.findOne({ identifier: { $regex: `^${instrument}` } })
 		.sort({ identifier: -1 })
-		.select("start")
+		.select("startTime")
 
 	const five = await kline_5m
 		.findOne({ identifier: { $regex: `^${instrument}` } })
 		.sort({ identifier: -1 })
-		.select("start")
+		.select("startTime")
 
 	const fifteen = await kline_15m
 		.findOne({ identifier: { $regex: `^${instrument}` } })
 		.sort({ identifier: -1 })
-		.select("start")
+		.select("startTime")
 
 	const hour = await kline_1h
 		.findOne({ identifier: { $regex: `^${instrument}` } })
 		.sort({ identifier: -1 })
-		.select("start")
+		.select("startTime")
 
 	return { one, three, five, fifteen, hour }
 }
