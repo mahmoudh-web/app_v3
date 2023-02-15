@@ -1,17 +1,5 @@
 import mongoose from "mongoose"
 
-const logTypeSchema = new mongoose.Schema({
-	name: String,
-})
-
-const logSchema = new mongoose.Schema({
-	createdAt: { type: Date, required: true, immutable: true },
-	readAt: Date,
-	message: String,
-	type: logTypeSchema,
-	function: String,
-})
-
 const instrumentSchema = new mongoose.Schema({
 	symbol: { type: String, unique: true },
 	status: String,
@@ -130,8 +118,13 @@ const queueSchema = new mongoose.Schema({
 	active: { type: Boolean, default: false },
 })
 
-const LogType = mongoose.model("logType", logTypeSchema)
-const Log = mongoose.model("log", logSchema)
+const testQueueSchema = new mongoose.Schema({
+	symbol: { type: String, required: true },
+	timeframe: { type: String, required: true },
+	bot: { type: String, required: true },
+	settings: { type: mongoose.Schema.Types.Mixed, required: true },
+})
+
 const Instrument = mongoose.model("instrument", instrumentSchema)
 const Queue = mongoose.model("download_queue", queueSchema)
 const kline_1m = mongoose.model("kline_1m", kline_1mSchema)
@@ -139,10 +132,9 @@ const kline_3m = mongoose.model("kline_3m", kline_3mSchema)
 const kline_5m = mongoose.model("kline_5m", kline_5mSchema)
 const kline_15m = mongoose.model("kline_15m", kline_15mSchema)
 const kline_1h = mongoose.model("kline_1h", kline_1hSchema)
+const testQueue = mongoose.model("testQueue", testQueueSchema)
 
 export {
-	LogType,
-	Log,
 	Instrument,
 	Queue,
 	kline_1m,
@@ -150,13 +142,5 @@ export {
 	kline_5m,
 	kline_15m,
 	kline_1h,
+	testQueue,
 }
-
-//   model TestQueue {
-//     id        String       @id @default(auto()) @map("_id") @db.ObjectId
-//     symbol    String
-//     timeframe String
-//     bot       String
-//     settings  Json
-//     active    Boolean   @default(false)
-//   }
