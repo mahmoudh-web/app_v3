@@ -37,7 +37,7 @@ const kline_1mSchema = new mongoose.Schema({
 	takerBuyBaseAssetVolume: { type: Number, required: true },
 	takerBuyQuoteAssetVolume: { type: Number, required: true },
 	identifier: { type: String, required: true, unique: true },
-	symbol: { type: String, required: true },
+	symbol: { type: String, required: true, index: true },
 })
 
 const kline_3mSchema = new mongoose.Schema({
@@ -54,7 +54,7 @@ const kline_3mSchema = new mongoose.Schema({
 	takerBuyBaseAssetVolume: { type: Number, required: true },
 	takerBuyQuoteAssetVolume: { type: Number, required: true },
 	identifier: { type: String, required: true, unique: true },
-	symbol: { type: String, required: true },
+	symbol: { type: String, required: true, index: true },
 })
 
 const kline_5mSchema = new mongoose.Schema({
@@ -71,7 +71,7 @@ const kline_5mSchema = new mongoose.Schema({
 	takerBuyBaseAssetVolume: { type: Number, required: true },
 	takerBuyQuoteAssetVolume: { type: Number, required: true },
 	identifier: { type: String, required: true, unique: true },
-	symbol: { type: String, required: true },
+	symbol: { type: String, required: true, index: true },
 })
 
 const kline_15mSchema = new mongoose.Schema({
@@ -88,7 +88,7 @@ const kline_15mSchema = new mongoose.Schema({
 	takerBuyBaseAssetVolume: { type: Number, required: true },
 	takerBuyQuoteAssetVolume: { type: Number, required: true },
 	identifier: { type: String, required: true, unique: true },
-	symbol: { type: String, required: true },
+	symbol: { type: String, required: true, index: true },
 })
 
 const kline_1hSchema = new mongoose.Schema({
@@ -105,7 +105,7 @@ const kline_1hSchema = new mongoose.Schema({
 	takerBuyBaseAssetVolume: { type: Number, required: true },
 	takerBuyQuoteAssetVolume: { type: Number, required: true },
 	identifier: { type: String, required: true, unique: true },
-	symbol: { type: String, required: true },
+	symbol: { type: String, required: true, index: true },
 })
 
 const queueSchema = new mongoose.Schema({
@@ -118,13 +118,34 @@ const queueSchema = new mongoose.Schema({
 	active: { type: Boolean, default: false },
 })
 
-const testQueueSchema = new mongoose.Schema({
+const testsSchema = new mongoose.Schema({
+	testId: { type: String, required: true },
 	symbol: { type: String, required: true },
-	timeframe: { type: String, required: true },
-	bot: { type: String, required: true },
-	settings: { type: mongoose.Schema.Types.Mixed, required: true },
+	interval: { type: Number, required: true },
+	psar_increment: { type: Number, required: true },
+	psar_max: { type: Number, required: true },
+	bollinger_period: { type: Number, required: true },
+	bollinger_deviation: { type: Number, required: true },
+	completed: Boolean,
 })
 
+const testResultsSchema = new mongoose.Schema({
+	symbol: { type: String, required: true },
+	interval: { type: Number, required: true },
+	testId: { type: String, required: true },
+	buys: { type: Number, required: true },
+	sells: { type: Number, required: true },
+	losing: { type: Number, required: true },
+	usdt_balance: { type: Number, required: true },
+	token_balance: { type: Number, required: true },
+	win_rate: { type: Number, required: true },
+	lose_rate: { type: Number, required: true },
+	profit: { type: Number, required: true },
+})
+
+const Results =
+	mongoose.models.results || mongoose.model("results", testResultsSchema)
+const Tests = mongoose.models.tests || mongoose.model("tests", testsSchema)
 const Instrument = mongoose.model("instrument", instrumentSchema)
 const Queue = mongoose.model("download_queue", queueSchema)
 const kline_1m = mongoose.model("kline_1m", kline_1mSchema)
@@ -132,7 +153,6 @@ const kline_3m = mongoose.model("kline_3m", kline_3mSchema)
 const kline_5m = mongoose.model("kline_5m", kline_5mSchema)
 const kline_15m = mongoose.model("kline_15m", kline_15mSchema)
 const kline_1h = mongoose.model("kline_1h", kline_1hSchema)
-const testQueue = mongoose.model("testQueue", testQueueSchema)
 
 export {
 	Instrument,
@@ -142,5 +162,6 @@ export {
 	kline_5m,
 	kline_15m,
 	kline_1h,
-	testQueue,
+	Tests,
+	Results,
 }
