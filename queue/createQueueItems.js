@@ -11,7 +11,7 @@ const createQueueItems = async () => {
 		return
 	}
 
-	const startDate = DateTime.fromISO("2021-01-01T00:00:00.000").setZone("utc")
+	const startDate = DateTime.fromISO("2022-01-01T00:00:00.000").setZone("utc")
 	const endDate = DateTime.now()
 		.minus({ days: 1 })
 		.endOf("day")
